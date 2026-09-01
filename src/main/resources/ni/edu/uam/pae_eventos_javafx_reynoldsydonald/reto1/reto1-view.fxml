@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" spacing="15.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.pae_eventos_javafx_reynoldsydonald.reto1.Reto1Controller">
+    <padding>
+        <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+    </padding>
+
+    <!-- Encabezado -->
+    <VBox alignment="CENTER" spacing="4.0" style="-fx-background-color: #2c3e50; -fx-background-radius: 10; -fx-padding: 14;">
+        <Label text="🛒 Inventario de Pulpería" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label text="Reto 1 - Registro y Búsqueda de Productos" textFill="#ecf0f1">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+    </VBox>
+
+    <!-- Formulario en tarjeta -->
+    <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-padding: 20;">
+        <GridPane hgap="10.0" vgap="12.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="90.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+
+            <!-- Código -->
+            <Label text="Código:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
+            <VBox spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <TextField fx:id="txtCodigo" onKeyPressed="#buscarProducto" promptText="Ej: 001 (Presione ENTER para buscar)" style="-fx-background-radius: 6; -fx-border-color: #bdc3c7; -fx-border-radius: 6; -fx-padding: 7;" />
+                <Label text="ℹ Presione ENTER en el código para buscar" textFill="#7f8c8d">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+            </VBox>
+
+            <!-- Nombre -->
+            <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
+            <TextField fx:id="txtNombre" promptText="Nombre del producto" style="-fx-background-radius: 6; -fx-border-color: #bdc3c7; -fx-border-radius: 6; -fx-padding: 7;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+            <!-- Precio -->
+            <Label text="Precio (C$):" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
+            <TextField fx:id="txtPrecio" promptText="0.00" style="-fx-background-radius: 6; -fx-border-color: #bdc3c7; -fx-border-radius: 6; -fx-padding: 7;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+            <!-- Cantidad -->
+            <Label text="Cantidad:" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
+            <TextField fx:id="txtCantidad" promptText="Cantidad en inventario" style="-fx-background-radius: 6; -fx-border-color: #bdc3c7; -fx-border-radius: 6; -fx-padding: 7;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        </GridPane>
+
+        <!-- Botón Guardar -->
+        <HBox alignment="CENTER" style="-fx-padding: 5 0 0 0;">
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarProducto" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 8; -fx-cursor: hand;" text="💾 Guardar" />
+        </HBox>
+    </VBox>
+
+    <!-- Área de Mensaje -->
+    <VBox alignment="CENTER" minHeight="50.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-padding: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 5, 0, 0, 2);">
+        <Label fx:id="lblMensaje" text="Bienvenido. Ingrese un código y presione ENTER para buscar o complete los datos y pulse Guardar." textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+    </VBox>
+
+</VBox>
