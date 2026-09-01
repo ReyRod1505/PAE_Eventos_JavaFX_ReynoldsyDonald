@@ -51,13 +51,11 @@ public class Reto3Controller {
 
     @FXML
     public void initialize() {
-        // Configuración de celdas estándar
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
         
-        // Formato para el precio
         colPrecio.setCellFactory(col -> new TableCell<Artesania, Double>() {
             @Override
             protected void updateItem(Double precio, boolean empty) {
@@ -70,7 +68,6 @@ public class Reto3Controller {
             }
         });
 
-        // Configuración de CellFactory para renderizar ImageView desde la URL/Ruta de la imagen
         colImagen.setCellValueFactory(new PropertyValueFactory<>("urlImagen"));
         colImagen.setCellFactory(param -> new TableCell<Artesania, String>() {
             private final ImageView imageView = new ImageView();
@@ -100,23 +97,17 @@ public class Reto3Controller {
 
         tblArtesanias.setItems(listaArtesanias);
 
-        // Cargar algunos datos iniciales de artesanías con imágenes de muestra
         listaArtesanias.add(new Artesania("ART-01", "Jarrón de Barro Masaya", "Cerámica", 350.00, "https://via.placeholder.com/40/8d6e63/ffffff?text=Jarron"));
         listaArtesanias.add(new Artesania("ART-02", "Hamaca Matagalpina", "Textiles", 1200.00, "https://via.placeholder.com/40/e67e22/ffffff?text=Hamaca"));
         listaArtesanias.add(new Artesania("ART-03", "Máscara El Güegüense", "Madera", 450.00, "https://via.placeholder.com/40/27ae60/ffffff?text=Mascara"));
         
-        System.out.println("[INFO] Módulo Reto 3 - Tienda de Artesanías inicializado correctamente.");
+        mostrarAlerta("ℹ Bienvenido a la Tienda de Artesanías. Seleccione o ingrese un producto.", "INFO");
     }
-
-    // --- MÉTODOS ACTION EVENT PARA MENUBAR Y TOOLBAR ---
 
     @FXML
     private void onNuevo(ActionEvent event) {
         limpiarFormulario();
-        String msg = "[EVENTO] Acción 'Nuevo' ejecutada: Formulario limpiado para un nuevo registro.";
-        System.out.println(msg);
-        lblMensaje.setStyle("-fx-text-fill: #2980b9;");
-        lblMensaje.setText(msg);
+        mostrarAlerta("📄 Formulario listo para registrar un nuevo producto.", "INFO");
     }
 
     @FXML
@@ -128,10 +119,7 @@ public class Reto3Controller {
         String urlImagen = txtUrlImagen.getText().trim();
 
         if (codigo.isEmpty() || nombre.isEmpty() || categoria.isEmpty() || precioStr.isEmpty()) {
-            String warnMsg = "[ADVERTENCIA] Debe completar los campos requeridos (Código, Nombre, Categoría y Precio).";
-            System.out.println(warnMsg);
-            lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
-            lblMensaje.setText(warnMsg);
+            mostrarAlerta("⚠ Complete todos los campos requeridos (Código, Nombre, Categoría y Precio).", "ADVERTENCIA");
             return;
         }
 
@@ -144,17 +132,10 @@ public class Reto3Controller {
             Artesania nueva = new Artesania(codigo, nombre, categoria, precio, urlImagen);
             listaArtesanias.add(nueva);
 
-            String successMsg = String.format("[ÉXITO] Artesanía '%s' (%s) guardada y agregada a la tabla.", nombre, codigo);
-            System.out.println(successMsg);
-            lblMensaje.setStyle("-fx-text-fill: #27ae60;");
-            lblMensaje.setText(successMsg);
-
+            mostrarAlerta(String.format("✔ Artesanía '%s' (%s) guardada exitosamente en la tabla.", nombre, codigo), "EXITO");
             limpiarFormulario();
         } catch (NumberFormatException e) {
-            String errorMsg = "[ERROR] El precio ingresado no es un número válido.";
-            System.err.println(errorMsg);
-            lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
-            lblMensaje.setText(errorMsg);
+            mostrarAlerta("❌ El precio ingresado debe ser un número válido.", "ERROR");
         }
     }
 
@@ -162,10 +143,7 @@ public class Reto3Controller {
     private void onBuscar(ActionEvent event) {
         String codigo = txtCodigo.getText().trim();
         if (codigo.isEmpty()) {
-            String msg = "[EVENTO] Acción 'Buscar': Ingrese un código en el campo de texto para buscar.";
-            System.out.println(msg);
-            lblMensaje.setStyle("-fx-text-fill: #e67e22;");
-            lblMensaje.setText(msg);
+            mostrarAlerta("⚠ Ingrese un código en el campo de texto para buscar.", "ADVERTENCIA");
             return;
         }
 
@@ -179,19 +157,13 @@ public class Reto3Controller {
                 txtUrlImagen.setText(a.getUrlImagen());
                 encontrado = true;
                 
-                String msg = String.format("[BÚSQUEDA] Artesanía encontrada: %s - %s", a.getCodigo(), a.getNombre());
-                System.out.println(msg);
-                lblMensaje.setStyle("-fx-text-fill: #27ae60;");
-                lblMensaje.setText(msg);
+                mostrarAlerta(String.format("🔎 Artesanía encontrada: %s - %s", a.getCodigo(), a.getNombre()), "EXITO");
                 break;
             }
         }
 
         if (!encontrado) {
-            String msg = String.format("[BÚSQUEDA] No se encontró ninguna artesanía con el código '%s'.", codigo);
-            System.out.println(msg);
-            lblMensaje.setStyle("-fx-text-fill: #e74c3c;");
-            lblMensaje.setText(msg);
+            mostrarAlerta(String.format("❌ No se encontró ninguna artesanía con el código '%s'.", codigo), "ERROR");
         }
     }
 
@@ -199,38 +171,44 @@ public class Reto3Controller {
     private void onProcesarVenta(ActionEvent event) {
         Artesania seleccionada = tblArtesanias.getSelectionModel().getSelectedItem();
         if (seleccionada != null) {
-            String msg = String.format("[VENTA] Venta procesada para '%s' por C$ %.2f", seleccionada.getNombre(), seleccionada.getPrecio());
-            System.out.println(msg);
-            lblMensaje.setStyle("-fx-text-fill: #8e44ad;");
-            lblMensaje.setText(msg);
+            mostrarAlerta(String.format("🛒 Venta procesada para '%s' por C$ %.2f", seleccionada.getNombre(), seleccionada.getPrecio()), "EXITO");
         } else {
-            String msg = "[VENTA] Seleccione una artesanía de la tabla para procesar la venta.";
-            System.out.println(msg);
-            lblMensaje.setStyle("-fx-text-fill: #e67e22;");
-            lblMensaje.setText(msg);
+            mostrarAlerta("⚠ Seleccione una artesanía de la tabla para procesar la venta.", "ADVERTENCIA");
         }
     }
 
     @FXML
     private void onVerHistorial(ActionEvent event) {
-        String msg = "[HISTORIAL] Visualizando historial de ventas (Total de registros en tabla: " + listaArtesanias.size() + ").";
-        System.out.println(msg);
-        lblMensaje.setStyle("-fx-text-fill: #34495e;");
-        lblMensaje.setText(msg);
+        mostrarAlerta(String.format("📊 Historial de ventas (Total de productos registrados: %d)", listaArtesanias.size()), "INFO");
     }
 
     @FXML
     private void onAcercaDe(ActionEvent event) {
-        String msg = "[AYUDA] Tienda de Artesanías v1.0 - Desarrollado para Práctica JavaFX (Reto 3).";
-        System.out.println(msg);
-        lblMensaje.setStyle("-fx-text-fill: #2980b9;");
-        lblMensaje.setText(msg);
+        mostrarAlerta("ℹ Tienda de Artesanías v1.0 - Práctica JavaFX Reto 3", "INFO");
     }
 
     @FXML
     private void onSalir(ActionEvent event) {
-        System.out.println("[SISTEMA] Saliendo de la aplicación Tienda de Artesanías...");
-        lblMensaje.setText("[SISTEMA] Cerrando aplicación...");
+        mostrarAlerta("❌ Cerrando aplicación...", "ERROR");
+    }
+
+    private void mostrarAlerta(String mensaje, String tipo) {
+        lblMensaje.setText(mensaje);
+        System.out.println(mensaje);
+        switch (tipo) {
+            case "EXITO":
+                lblMensaje.setStyle("-fx-background-color: #d1fae5; -fx-text-fill: #065f46; -fx-border-color: #6ee7b7; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 12; -fx-font-weight: bold;");
+                break;
+            case "ERROR":
+                lblMensaje.setStyle("-fx-background-color: #fee2e2; -fx-text-fill: #991b1b; -fx-border-color: #fca5a5; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 12; -fx-font-weight: bold;");
+                break;
+            case "ADVERTENCIA":
+                lblMensaje.setStyle("-fx-background-color: #fef3c7; -fx-text-fill: #92400e; -fx-border-color: #fcd34d; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 12; -fx-font-weight: bold;");
+                break;
+            default: // INFO
+                lblMensaje.setStyle("-fx-background-color: #e0f2fe; -fx-text-fill: #075985; -fx-border-color: #7dd3fc; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 12; -fx-font-weight: bold;");
+                break;
+        }
     }
 
     private void limpiarFormulario() {

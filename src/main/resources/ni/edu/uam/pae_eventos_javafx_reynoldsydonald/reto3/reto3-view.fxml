@@ -71,8 +71,8 @@
                 </Label>
             </HBox>
 
-            <!-- Formulario de entrada -->
-            <VBox spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 2);">
+            <!-- Formulario de entrada con alerta integrada -->
+            <VBox spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-padding: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 2);">
                 <GridPane hgap="10.0" vgap="8.0">
                     <Label text="Código:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <TextField fx:id="txtCodigo" promptText="ART-01" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -89,6 +89,15 @@
                     <Label text="URL Imagen:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <TextField fx:id="txtUrlImagen" promptText="https://... (URL o ruta de imagen)" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
                 </GridPane>
+
+                <!-- Alerta integrada cerca de los controles de formulario -->
+                <VBox alignment="CENTER_LEFT" style="-fx-padding: 5 0 0 0;">
+                    <Label fx:id="lblMensaje" maxWidth="1.7976931348623157E308" text="Bienvenido" wrapText="true">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </Label>
+                </VBox>
             </VBox>
 
             <!-- TableView de Artesanías -->
@@ -108,15 +117,4 @@
             </VBox>
         </VBox>
     </center>
-
-    <!-- Parte Inferior: Estado / Mensajes -->
-    <bottom>
-        <VBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-width: 1 0 0 0; -fx-padding: 8 15 8 15;">
-            <Label fx:id="lblMensaje" text="Bienvenido. Utilice el MenuBar o ToolBar para interactuar." textFill="#2c3e50">
-                <font>
-                    <Font size="12.0" />
-                </font>
-            </Label>
-        </VBox>
-    </bottom>
 </BorderPane>
