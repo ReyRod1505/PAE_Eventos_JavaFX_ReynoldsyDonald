@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Reto1Application extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Reto1Application.class.getResource("reto1-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Reto1Application.class.getResource("/ni/edu/uam/pae_eventos_javafx_reynoldsydonald/reto1/reto1-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 480, 560);
         stage.setTitle("Reto 1 - Inventario de Pulpería");
         stage.setResizable(false);
