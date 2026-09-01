@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="480.0" prefWidth="720.0" spacing="18.0"
+      style="-fx-background-color: #F0F9FF;"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ni.edu.uam.pae_eventos_javafx_reynoldsydonald.reto2.controlador.LoteController">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- Header superior tipo banner celeste -->
+    <VBox style="-fx-background-color: #0284C7; -fx-background-radius: 8; -fx-padding: 14 18;">
+        <Label text="Recepción de Lotes de Café" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label text="Seleccione un lote para ver detalles o use clic derecho para opciones" textFill="#E0F2FE">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+    </VBox>
+
+    <!-- Contenedor principal -->
+    <HBox spacing="18.0" VBox.vgrow="ALWAYS">
+
+        <TableView fx:id="tblLotes" HBox.hgrow="ALWAYS"
+                   style="-fx-background-radius: 8; -fx-border-color: #BAE6FD; -fx-border-radius: 8; -fx-border-width: 1;">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="60.0" text="ID" />
+                <TableColumn fx:id="colProductor" prefWidth="180.0" text="Productor" />
+                <TableColumn fx:id="colQuintales" prefWidth="90.0" text="Quintales" />
+                <TableColumn fx:id="colVariedad" prefWidth="110.0" text="Variedad" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+
+        <!-- Tarjeta flotante de Detalles -->
+        <VBox prefWidth="260.0" spacing="12.0"
+              style="-fx-background-color: #FFFFFF; -fx-border-color: #7DD3FC; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 18; -fx-effect: dropshadow(three-pass-box, rgba(2, 132, 199, 0.15), 10, 0, 0, 4);">
+
+            <VBox style="-fx-border-color: transparent transparent #E0F2FE transparent; -fx-border-width: 0 0 2 0; -fx-padding: 0 0 8 0;">
+                <Label text="Detalles del Lote" textFill="#0369A1">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+            </VBox>
+
+            <VBox spacing="10.0" style="-fx-padding: 5 0 0 0;">
+                <Label fx:id="lblDetalleId" text="ID: -" textFill="#0F172A">
+                    <font><Font size="13.0" /></font>
+                </Label>
+                <Label fx:id="lblDetalleProductor" text="Productor: -" textFill="#0F172A">
+                    <font><Font size="13.0" /></font>
+                </Label>
+                <Label fx:id="lblDetalleQuintales" text="Quintales: -" textFill="#0F172A">
+                    <font><Font size="13.0" /></font>
+                </Label>
+                <Label fx:id="lblDetalleVariedad" text="Variedad: -" textFill="#0F172A">
+                    <font><Font size="13.0" /></font>
+                </Label>
+            </VBox>
+        </VBox>
+
+    </HBox>
+</VBox>
