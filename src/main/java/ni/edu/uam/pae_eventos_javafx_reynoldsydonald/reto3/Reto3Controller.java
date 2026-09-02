@@ -135,7 +135,7 @@ public class Reto3Controller {
             mostrarAlerta(String.format("✔ Artesanía '%s' (%s) guardada exitosamente en la tabla.", nombre, codigo), "EXITO");
             limpiarFormulario();
         } catch (NumberFormatException e) {
-            mostrarAlerta("❌ El precio ingresado debe ser un número válido.", "ERROR");
+            mostrarAlerta("El precio ingresado debe ser un número válido.", "ERROR");
         }
     }
 
@@ -143,7 +143,7 @@ public class Reto3Controller {
     private void onBuscar(ActionEvent event) {
         String codigo = txtCodigo.getText().trim();
         if (codigo.isEmpty()) {
-            mostrarAlerta("⚠ Ingrese un código en el campo de texto para buscar.", "ADVERTENCIA");
+            mostrarAlerta("Ingrese un código en el campo de texto para buscar.", "ADVERTENCIA");
             return;
         }
 
@@ -157,13 +157,13 @@ public class Reto3Controller {
                 txtUrlImagen.setText(a.getUrlImagen());
                 encontrado = true;
                 
-                mostrarAlerta(String.format("🔎 Artesanía encontrada: %s - %s", a.getCodigo(), a.getNombre()), "EXITO");
+                mostrarAlerta(String.format("Artesanía encontrada: %s - %s", a.getCodigo(), a.getNombre()), "EXITO");
                 break;
             }
         }
 
         if (!encontrado) {
-            mostrarAlerta(String.format("❌ No se encontró ninguna artesanía con el código '%s'.", codigo), "ERROR");
+            mostrarAlerta(String.format("No se encontró ninguna artesanía con el código '%s'.", codigo), "ERROR");
         }
     }
 
@@ -189,7 +189,7 @@ public class Reto3Controller {
 
     @FXML
     private void onSalir(ActionEvent event) {
-        mostrarAlerta("❌ Cerrando aplicación...", "ERROR");
+        mostrarAlerta("Cerrando aplicación...", "ERROR");
     }
 
     private void mostrarAlerta(String mensaje, String tipo) {

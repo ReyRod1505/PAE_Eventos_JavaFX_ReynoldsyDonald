@@ -38,7 +38,7 @@ public class Reto1Controller {
         inventarioSimulado.put("003", new Producto("003", "Aceite 1L", 65.00, 15));
         inventarioSimulado.put("004", new Producto("004", "Azúcar (lb)", 18.00, 60));
 
-        mostrarAlerta("ℹ Ingrese un código y presione ENTER para buscar o complete los datos y guarde.", "INFO");
+        mostrarAlerta("Ingrese un código y presione ENTER para buscar o complete los datos y guarde.", "INFO");
     }
 
     @FXML
@@ -50,7 +50,7 @@ public class Reto1Controller {
 
         // Verificación de campos no vacíos usando isEmpty()
         if (codigo.isEmpty() || nombre.isEmpty() || precioStr.isEmpty() || cantidadStr.isEmpty()) {
-            mostrarAlerta("⚠ Por favor, complete todos los campos del formulario.", "ADVERTENCIA");
+            mostrarAlerta("Por favor, complete todos los campos del formulario.", "ADVERTENCIA");
             return;
         }
 
@@ -59,7 +59,7 @@ public class Reto1Controller {
             int cantidad = Integer.parseInt(cantidadStr);
 
             if (precio <= 0 || cantidad < 0) {
-                mostrarAlerta("❌ El precio debe ser mayor a 0 y la cantidad no puede ser negativa.", "ERROR");
+                mostrarAlerta("El precio debe ser mayor a 0 y la cantidad no puede ser negativa.", "ERROR");
                 return;
             }
 
@@ -67,10 +67,10 @@ public class Reto1Controller {
             Producto prod = new Producto(codigo, nombre, precio, cantidad);
             inventarioSimulado.put(codigo, prod);
 
-            mostrarAlerta(String.format("✔ ¡Producto '%s' guardado exitosamente!", nombre), "EXITO");
+            mostrarAlerta(String.format("¡Producto '%s' guardado exitosamente!", nombre), "EXITO");
 
         } catch (NumberFormatException e) {
-            mostrarAlerta("❌ Error: Ingrese datos numéricos válidos en precio y cantidad.", "ERROR");
+            mostrarAlerta("Error: Ingrese datos numéricos válidos en precio y cantidad.", "ERROR");
         }
     }
 
@@ -80,7 +80,7 @@ public class Reto1Controller {
             String codigo = txtCodigo.getText().trim();
 
             if (codigo.isEmpty()) {
-                mostrarAlerta("⚠ Ingrese un código en el campo para realizar la búsqueda.", "ADVERTENCIA");
+                mostrarAlerta("Ingrese un código en el campo para realizar la búsqueda.", "ADVERTENCIA");
                 return;
             }
 
@@ -90,9 +90,9 @@ public class Reto1Controller {
                 txtPrecio.setText(String.valueOf(prod.getPrecio()));
                 txtCantidad.setText(String.valueOf(prod.getCantidad()));
 
-                mostrarAlerta(String.format("🔎 Producto encontrado: %s (C$ %.2f - Cantidad: %d)", prod.getNombre(), prod.getPrecio(), prod.getCantidad()), "EXITO");
+                mostrarAlerta(String.format("Producto encontrado: %s (C$ %.2f - Cantidad: %d)", prod.getNombre(), prod.getPrecio(), prod.getCantidad()), "EXITO");
             } else {
-                mostrarAlerta(String.format("ℹ Código '%s' no encontrado. Puede ingresar los datos para registrarlo.", codigo), "INFO");
+                mostrarAlerta(String.format("Código '%s' no encontrado. Puede ingresar los datos para registrarlo.", codigo), "INFO");
                 txtNombre.clear();
                 txtPrecio.clear();
                 txtCantidad.clear();
