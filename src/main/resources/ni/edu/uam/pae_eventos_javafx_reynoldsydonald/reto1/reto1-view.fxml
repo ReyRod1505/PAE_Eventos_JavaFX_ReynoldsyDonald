@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -30,7 +29,7 @@
         </Label>
     </VBox>
 
-    <!-- Formulario en tarjeta -->
+    <!-- Formulario en tarjeta con alerta directamente debajo del botón -->
     <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-padding: 20;">
         <GridPane hgap="10.0" vgap="12.0">
             <columnConstraints>
@@ -79,18 +78,18 @@
         </GridPane>
 
         <!-- Botón Guardar -->
-        <HBox alignment="CENTER" style="-fx-padding: 5 0 0 0;">
-            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarProducto" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 8; -fx-cursor: hand;" text="💾 Guardar" />
+        <HBox alignment="CENTER" style="-fx-padding: 5 0 5 0;">
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarProducto" prefHeight="38.0" prefWidth="220.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 8; -fx-cursor: hand;" text="💾 Guardar" />
         </HBox>
-    </VBox>
 
-    <!-- Área de Mensaje -->
-    <VBox alignment="CENTER" minHeight="50.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-padding: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 5, 0, 0, 2);">
-        <Label fx:id="lblMensaje" text="Bienvenido. Ingrese un código y presione ENTER para buscar o complete los datos y pulse Guardar." textAlignment="CENTER" wrapText="true">
-            <font>
-                <Font size="12.0" />
-            </font>
-        </Label>
+        <!-- Alerta / Mensaje directamente debajo del botón -->
+        <VBox alignment="CENTER">
+            <Label fx:id="lblMensaje" maxWidth="1.7976931348623157E308" text="Bienvenido" textAlignment="CENTER" wrapText="true">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+        </VBox>
     </VBox>
 
 </VBox>
