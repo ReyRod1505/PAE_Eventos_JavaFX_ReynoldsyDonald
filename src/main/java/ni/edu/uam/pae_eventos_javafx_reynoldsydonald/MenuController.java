@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloController {
+public class MenuController {
 
     @FXML
     private void abrirReto1(ActionEvent event) {
@@ -19,6 +19,20 @@ public class HelloController {
             Stage stage = new Stage();
             stage.setTitle("Reto 1 - Inventario de Pulpería");
             stage.setScene(new Scene(root, 480, 560));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void abrirReto2(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ni/edu/uam/pae_eventos_javafx_reynoldsydonald/reto2/LoteView.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Reto 2 - Recepción de Café");
+            stage.setScene(new Scene(root, 850, 500));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
